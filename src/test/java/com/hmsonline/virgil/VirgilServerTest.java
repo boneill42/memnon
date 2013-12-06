@@ -12,8 +12,7 @@ public abstract class VirgilServerTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-        serverThread = new Thread(new EmbeddableServer(new String[] { "server", "src/test/resources/virgil.yaml",
-                "-embedded" }));
+        serverThread = new Thread(new EmbeddableServer(new String[] { "server", "src/test/resources/virgil.yaml", "-host=localhost"}));
         serverThread.start();
         Thread.sleep(5000);
 //        ConfigurationStore.getStore().create();

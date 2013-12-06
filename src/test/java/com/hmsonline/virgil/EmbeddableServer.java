@@ -14,7 +14,6 @@ public class EmbeddableServer implements Runnable {
         try {
             VirgilService.main(this.args);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }       
     }

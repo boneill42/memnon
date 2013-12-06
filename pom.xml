@@ -39,9 +39,14 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.datastax.cassandra</groupId>
+			<artifactId>cassandra-driver-core</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.hmsonline</groupId>
 			<artifactId>hms-cassandra-mapreduce</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -57,17 +62,6 @@
 			<groupId>org.jboss.netty</groupId>
 			<artifactId>netty</artifactId>
 			<version>3.2.9.Final</version>
-		</dependency>
-		<!-- Disabling triggers for now. -->
-		<!-- <dependency> <groupId>com.hmsonline</groupId> <artifactId>hms-cassandra-triggers</artifactId> 
-			<version>1.0.0</version> <exclusions> <exclusion> <artifactId>guava</artifactId> 
-			<groupId>com.google.guava</groupId> </exclusion> <exclusion> <groupId>org.codehaus.jackson</groupId> 
-			<artifactId>jackson-mapper-asl</artifactId> </exclusion> <exclusion> <groupId>org.codehaus.jackson</groupId> 
-			<artifactId>jackson-core-asl</artifactId> </exclusion> </exclusions> </dependency> -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.6.11</version>
 		</dependency>
 		<dependency>
 			<groupId>com.yammer.dropwizard</groupId>
@@ -89,32 +83,5 @@
 				<directory>${basedir}/src/main/resources</directory>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>org.codehaus.mojo</groupId>
-                                    <artifactId>aspectj-maven-plugin</artifactId>
-                                    <versionRange>[1.0,)</versionRange>
-                                    <goals>
-                                        <goal>test-compile</goal>
-                                        <goal>compile</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <execute />
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
-                </configuration>
-            </plugin>
-		</plugins>
 	</build>
 </project>

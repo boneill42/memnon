@@ -6,7 +6,6 @@ import com.hmsonline.virgil.config.VirgilConfiguration;
 import com.hmsonline.virgil.exception.KeyspaceExceptionMapper;
 import com.hmsonline.virgil.health.CassandraHealthCheck;
 import com.hmsonline.virgil.resource.DataResource;
-import com.hmsonline.virgil.resource.MapReduceResource;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.bundles.AssetsBundle;
 import com.yammer.dropwizard.config.Environment;
@@ -27,7 +26,6 @@ public class VirgilService extends Service<VirgilConfiguration> {
 
     @Override
     protected void initialize(VirgilConfiguration conf, Environment env) throws Exception {
-        env.addResource(new MapReduceResource(this));
         env.addResource(new DataResource(this));
         env.addHealthCheck(new CassandraHealthCheck(this));
         env.addProvider(new KeyspaceExceptionMapper());

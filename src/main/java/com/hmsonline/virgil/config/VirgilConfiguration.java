@@ -2,9 +2,9 @@ package com.hmsonline.virgil.config;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.cassandra.thrift.ConsistencyLevel;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.datastax.driver.core.ConsistencyLevel;
 import com.yammer.dropwizard.config.Configuration;
 
 public class VirgilConfiguration extends Configuration {

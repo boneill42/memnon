@@ -1,81 +1,62 @@
 package com.hmsonline.virgil;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import org.apache.cassandra.thrift.ConsistencyLevel;
-import org.apache.cassandra.thrift.InvalidRequestException;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.junit.Ignore;
+import org.json.simple.JSONValue;
 import org.junit.Test;
-import org.mortbay.util.ajax.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.hmsonline.virgil.CassandraStorage;
-import com.hmsonline.virgil.VirgilService;
+import com.datastax.driver.core.ConsistencyLevel;
 
-@Ignore
 public class CassandraStorageTest extends VirgilServerTest {
-    private static final String KEY = "TEST_ROW";
-    private static final String COLUMN_FAMILY = "TEST_CF";
-    private static final String KEYSPACE = "TEST_KEYSPACE";
+    private static final String TABLE = "test_cf";
+    private static final String KEYSPACE = "test_keyspace";
+    private static Logger logger = LoggerFactory.getLogger(CassandraStorageTest.class);
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDatabaseServices() throws Exception {
-        
         CassandraStorage dataService = VirgilService.storage;
-        JSONObject slice = new JSONObject();
-        slice.put("FIRST_NAME", "John");
-        slice.put("LAST_NAME", "Smith");
 
         try { // CLEANUP FROM BEFORE
-            dataService.dropKeyspace(KEYSPACE);
+            //dataService.dropKeyspace(KEYSPACE);
         } catch (Exception e) {
+            logger.warn("Ignoring exception when dropping keyspace, presuming first run.");
         }
 
         // CREATE KEYSPACE
-        dataService.addKeyspace(KEYSPACE);
+        //dataService.addKeyspace(KEYSPACE, "SimpleStrategy", 1);
 
         // CREATE COLUMN FAMILY
-        dataService.createColumnFamily(KEYSPACE, COLUMN_FAMILY, null);
+        JSONObject columns = (JSONObject) JSONValue.parse("{\"col1\":\"varchar\", \"col2\":\"int\", \"col3\":\"varchar\"}");
+        JSONArray keys = (JSONArray) JSONValue.parse("[\"col1\", \"col2\"]");
+        //dataService.createTable(KEYSPACE, TABLE, columns, keys);
 
-        // INSERT THE ROW
-        dataService.setColumn(KEYSPACE, COLUMN_FAMILY, KEY, slice, ConsistencyLevel.ONE, false);
+        // UPDATE
+        JSONObject row = (JSONObject) JSONValue.parse("{\"col3\":\"val3\"}");
+        JSONObject where = (JSONObject) JSONValue.parse("{\"col1\":\"val1\", \"col2\":2}");
+        dataService.update(KEYSPACE, TABLE, row, where, ConsistencyLevel.ONE);
 
-        // FETCH THE ROW (VERIFY INSERT ROW)
-        JSONObject json = dataService.getSlice(KEYSPACE, COLUMN_FAMILY, KEY, ConsistencyLevel.ONE);
-        assertEquals(JSON.parse("{\"FIRST_NAME\":\"John\",\"LAST_NAME\":\"Smith\"}"), json);
+        // SELECT
+        JSONArray selectCols = (JSONArray) JSONValue.parse("[\"col1\", \"col2\", \"col3\"]");
+        JSONArray json = dataService.select(KEYSPACE, TABLE, selectCols, where, ConsistencyLevel.ONE);
+        assertEquals("[[\"val1\",\"val3\"]]", json.toString());
 
-        // ADD A COLUMN
-        dataService.addColumn(KEYSPACE, COLUMN_FAMILY, KEY, "STATE", "CA", ConsistencyLevel.ONE, false);
+        // PARTIAL DELETE 
+        JSONArray singleCol = (JSONArray) JSONValue.parse("[\"col3\"]");
+        dataService.delete(KEYSPACE, TABLE, singleCol, where, ConsistencyLevel.ONE);
+        json = dataService.select(KEYSPACE, TABLE, selectCols, where, ConsistencyLevel.ONE);
+        assertEquals("[[\"val1\",null]]", json.toString());
 
-        // FETCH THE ROW (VERIFY ADD COLUMN)
-        json = dataService.getSlice(KEYSPACE, COLUMN_FAMILY, KEY, ConsistencyLevel.ONE);
-        assertEquals(JSON.parse("{\"STATE\":\"CA\",\"FIRST_NAME\":\"John\",\"LAST_NAME\":\"Smith\"}"), json);
+        // DROP TABLE
+        dataService.dropTable(KEYSPACE, TABLE);
+        json = dataService.select(KEYSPACE, TABLE, selectCols, where, ConsistencyLevel.ONE);
+        //assertTrue("Expected exception when accessing dropped column family.", threw);
 
-        // DELETE THE ROW
-        dataService.deleteRow(KEYSPACE, COLUMN_FAMILY, "TEST_SLICE", ConsistencyLevel.ONE, false);
-        json = dataService.getSlice(KEYSPACE, COLUMN_FAMILY, "TEST_SLICE", ConsistencyLevel.ONE);
-        assertEquals(null, json);
-
-        // DROP COLUMN FAMILY
-        dataService.dropColumnFamily(KEYSPACE, COLUMN_FAMILY);
-        boolean threw = false;
-        try {
-            json = dataService.getSlice(KEYSPACE, COLUMN_FAMILY, "TEST_SLICE", ConsistencyLevel.ONE);
-        } catch (InvalidRequestException ire) {
-            threw = true;
-        }
-        assertTrue("Expected exception when accessing dropped column family.", threw);
-
-        // DROP KEY SPACE
+        // DROP KEYSPACE
         dataService.dropKeyspace(KEYSPACE);
-        boolean threw1 = false;
-        try {
-            json = dataService.getSlice(KEYSPACE, COLUMN_FAMILY, "TEST_SLICE", ConsistencyLevel.ONE);
-        } catch (InvalidRequestException ire) {
-            threw1 = true;
-        }
-        assertTrue("Expected exception when accessing dropped key space.", threw1);
+        json = dataService.select(KEYSPACE, TABLE, selectCols, where, ConsistencyLevel.ONE);
     }
 }
