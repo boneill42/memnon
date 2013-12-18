@@ -1,1 +1,13 @@
-This is a REST interface for Virgil built on Drop-Wizard.  It allows the user to create/drop keyspaces, column families rows and columns using JSON over REST.  For a complete description of usage see Virgil. (https://github.com/hmsonline/virgil/wiki)
+
+## Coming Soon!
+
+Memon is a REST interface for Cassandra built on CQL
+
+## Goals
+1. Provide a REST interface for the majority of Cassandra's functions
+
+## Documentation
+
+
+## Stay in Touch
+
