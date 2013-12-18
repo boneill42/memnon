@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>hms-cassandra-rest</artifactId>
+	<artifactId>memnon</artifactId>
 	<packaging>jar</packaging>
-	<name>HMS : Cassandra : Rest</name>
+	<name>Memnon</name>
 	<url>http://maven.apache.org</url>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<groupId>com.hmsonline</groupId>
 
 	<parent>
@@ -24,9 +24,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git@github.com:hmsonline/cassandra-rest.git</connection>
-		<developerConnection>scm:git:git@github.com:hmsonline/cassandra-rest.git</developerConnection>
-		<url>git@github.com:hmsonline/cassandra-rest.git</url>
+		<connection>scm:git:git@github.com:hmsonline/memnon.git</connection>
+		<developerConnection>scm:git:git@github.com:hmsonline/memnon.git</developerConnection>
+		<url>git@github.com:hmsonline/memnon.git</url>
 	</scm>
 
 	<developers>
@@ -44,9 +44,9 @@
 			<version>1.0.2</version>
 		</dependency>
 		<dependency>
-			<groupId>com.hmsonline</groupId>
-			<artifactId>hms-cassandra-mapreduce</artifactId>
-			<version>1.0.1</version>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
