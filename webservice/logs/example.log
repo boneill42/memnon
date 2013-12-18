@@ -1,0 +1,381 @@
+INFO  [2013-12-18 21:01:30,608] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:01:30,623] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:01:30,804] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.11 12/09/2011 10:27 AM'
+INFO  [2013-12-18 21:01:30,906] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+ERROR [2013-12-18 21:01:31,255] com.sun.jersey.spi.inject.Errors: The following errors and warnings have been detected with resource and/or provider classes:
+  WARNING: A sub-resource method, public org.json.simple.JSONArray com.hmsonline.memnon.resource.DataResource.getKeyspaces() throws java.lang.Exception, with URI template, "/", is treated as a resource method
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.createTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.dropTable(java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+WARN  [2013-12-18 21:01:31,256] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+DEBUG [2013-12-18 21:01:33,973] com.hmsonline.memnon.CassandraStorage: On [test_keyspace], executing [create table test_cf (col1 varchar, col3 varchar, col2 int, primary key (col1, col2));] 
+DEBUG [2013-12-18 21:01:33,973] com.hmsonline.memnon.CassandraStorage: Constructing session for keyspace [test_keyspace]
+INFO  [2013-12-18 21:02:06,760] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:02:06,772] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:02:06,967] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.11 12/09/2011 10:27 AM'
+INFO  [2013-12-18 21:02:07,056] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+ERROR [2013-12-18 21:02:07,408] com.sun.jersey.spi.inject.Errors: The following errors and warnings have been detected with resource and/or provider classes:
+  WARNING: A sub-resource method, public org.json.simple.JSONArray com.hmsonline.memnon.resource.DataResource.getKeyspaces() throws java.lang.Exception, with URI template, "/", is treated as a resource method
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.createTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.dropTable(java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+WARN  [2013-12-18 21:02:07,411] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+DEBUG [2013-12-18 21:02:10,125] com.hmsonline.memnon.CassandraStorage: On [test_keyspace], executing [create table test_cf (col1 varchar, col3 varchar, col2 int, primary key (col1, col2));] 
+DEBUG [2013-12-18 21:02:10,125] com.hmsonline.memnon.CassandraStorage: Constructing session for keyspace [test_keyspace]
+INFO  [2013-12-18 21:09:30,620] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:09:30,632] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:09:30,813] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.11 12/09/2011 10:27 AM'
+INFO  [2013-12-18 21:09:30,903] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+ERROR [2013-12-18 21:09:31,280] com.sun.jersey.spi.inject.Errors: The following errors and warnings have been detected with resource and/or provider classes:
+  WARNING: A sub-resource method, public org.json.simple.JSONArray com.hmsonline.memnon.resource.DataResource.getKeyspaces() throws java.lang.Exception, with URI template, "/", is treated as a resource method
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.createTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.dropTable(java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+WARN  [2013-12-18 21:09:31,280] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+DEBUG [2013-12-18 21:09:34,034] com.hmsonline.memnon.CassandraStorage: On [test_keyspace], executing [create table test_cf (col1 varchar, col3 varchar, col2 int, primary key (col1, col2));] 
+DEBUG [2013-12-18 21:09:34,034] com.hmsonline.memnon.CassandraStorage: Constructing session for keyspace [test_keyspace]
+INFO  [2013-12-18 21:20:55,203] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:20:55,217] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:20:55,405] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.11 12/09/2011 10:27 AM'
+INFO  [2013-12-18 21:20:55,498] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+ERROR [2013-12-18 21:20:55,880] com.sun.jersey.spi.inject.Errors: The following errors and warnings have been detected with resource and/or provider classes:
+  WARNING: A sub-resource method, public org.json.simple.JSONArray com.hmsonline.memnon.resource.DataResource.getKeyspaces() throws java.lang.Exception, with URI template, "/", is treated as a resource method
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.dropTable(java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.createTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+WARN  [2013-12-18 21:20:55,881] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+INFO  [2013-12-18 21:33:11,777] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:33:11,786] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:33:12,079] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+WARN  [2013-12-18 21:33:12,468] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+INFO  [2013-12-18 21:36:05,862] com.yammer.dropwizard.cli.ServerCommand: Starting cirrus
+INFO  [2013-12-18 21:36:05,882] com.yammer.dropwizard.cli.ServerCommand: 
+==========================================================                                
+ ____  _____ ____  ____   ___  ____  
+|    \| ___ |    \|  _ \ / _ \|  _ \ 
+| | | | ____| | | | | | | |_| | | | |
+|_|_|_|_____)_|_|_|_| |_|\___/|_| |_|                                                          
+==========================================================
+INFO  [2013-12-18 21:36:06,075] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.11 12/09/2011 10:27 AM'
+INFO  [2013-12-18 21:36:06,164] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    DELETE  /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    GET     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+    PUT     /data/ (com.hmsonline.memnon.resource.DataResource)
+
+ERROR [2013-12-18 21:36:06,532] com.sun.jersey.spi.inject.Errors: The following errors and warnings have been detected with resource and/or provider classes:
+  WARNING: A sub-resource method, public org.json.simple.JSONArray com.hmsonline.memnon.resource.DataResource.getKeyspaces() throws java.lang.Exception, with URI template, "/", is treated as a resource method
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.createTable(java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.update(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+  SEVERE: Producing media type conflict. The resource methods public void com.hmsonline.memnon.resource.DataResource.dropTable(java.lang.String,java.lang.String) throws java.lang.Exception and public void com.hmsonline.memnon.resource.DataResource.delete(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception can produce the same media type
+WARN  [2013-12-18 21:36:06,533] /: unavailable
+! com.sun.jersey.spi.inject.Errors$ErrorMessagesException
+! 	at com.sun.jersey.spi.inject.Errors.processErrorMessages(Errors.java:170)
+! 	at com.sun.jersey.spi.inject.Errors.postProcess(Errors.java:136)
+! 	at com.sun.jersey.spi.inject.Errors.processWithErrors(Errors.java:199)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:771)
+! 	at com.sun.jersey.server.impl.application.WebApplicationImpl.initiate(WebApplicationImpl.java:766)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.initiate(ServletContainer.java:488)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer$InternalWebComponent.initiate(ServletContainer.java:318)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.load(WebComponent.java:609)
+! 	at com.sun.jersey.spi.container.servlet.WebComponent.init(WebComponent.java:210)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:373)
+! 	at com.sun.jersey.spi.container.servlet.ServletContainer.init(ServletContainer.java:556)
+! 	at javax.servlet.GenericServlet.init(GenericServlet.java:241)
+! 	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:444)
+! 	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:264)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:770)
+! 	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:249)
+! 	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:676)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:224)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:90)
+! 	at org.eclipse.jetty.server.Server.doStart(Server.java:261)
+! 	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:59)
+! 	at com.yammer.dropwizard.cli.ServerCommand.run(ServerCommand.java:61)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:52)
+! 	at com.hmsonline.memnon.MemnonCommand.run(MemnonCommand.java:12)
+! 	at com.yammer.dropwizard.cli.ConfiguredCommand.run(ConfiguredCommand.java:70)
+! 	at com.yammer.dropwizard.cli.Command.run(Command.java:112)
+! 	at com.yammer.dropwizard.AbstractService.run(AbstractService.java:160)
+! 	at com.hmsonline.memnon.MemnonService.main(MemnonService.java:16)
+! 	at com.hmsonline.memnon.EmbeddableServer.run(EmbeddableServer.java:15)
+! 	at java.lang.Thread.run(Thread.java:722)
+DEBUG [2013-12-18 21:36:09,288] com.hmsonline.memnon.CassandraStorage: On [test_keyspace], executing [create table test_cf (col1 varchar, col3 varchar, col2 int, primary key (col1, col2));] 
+DEBUG [2013-12-18 21:36:09,288] com.hmsonline.memnon.CassandraStorage: Constructing session for keyspace [test_keyspace]
