@@ -17,7 +17,7 @@ public class MemnonService extends Service<MemnonConfiguration> {
     }
 
     protected MemnonService() {
-        super("cirrus");
+        super("memnon");
         addBundle(new AssetsBundle("/ui", "/"));
         addCommand(new MemnonCommand("cassandra"));
     }
