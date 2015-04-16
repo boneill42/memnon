@@ -1,6 +1,6 @@
 package com.hmsonline.memnon;
 
-import com.hmsonline.memnon.MemnonService;
+import com.griddelta.memnon.MemnonApplication;
 
 
 public class EmbeddableServer implements Runnable {
@@ -12,7 +12,7 @@ public class EmbeddableServer implements Runnable {
 
     public void run() {
         try {
-            MemnonService.main(this.args);
+            MemnonApplication.main(this.args);
         } catch (Exception e) {
             e.printStackTrace();
         }       

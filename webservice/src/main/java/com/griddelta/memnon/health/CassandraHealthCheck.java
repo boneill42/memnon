@@ -1,17 +1,18 @@
-package com.hmsonline.memnon.health;
+package com.griddelta.memnon.health;
 
 import org.json.simple.JSONArray;
 
-import com.hmsonline.memnon.MemnonService;
-import com.hmsonline.memnon.MemnonConfiguration;
-import com.yammer.metrics.core.HealthCheck;
+import com.codahale.metrics.health.HealthCheck;
+import com.griddelta.memnon.MemnonApplication;
+import com.griddelta.memnon.MemnonConfiguration;
 
 public class CassandraHealthCheck extends HealthCheck {
-	private MemnonService service;
+	private MemnonApplication service;
+    private MemnonConfiguration configuration;
 
-	public CassandraHealthCheck(MemnonService service) {
-		super("Cassandra Check");
+	public CassandraHealthCheck(MemnonApplication service, MemnonConfiguration configuration) {
 		this.service = service;
+        this.configuration = configuration;
 	}
 
 	@Override
@@ -19,8 +20,8 @@ public class CassandraHealthCheck extends HealthCheck {
 		Result result = null;
 		
 		try {
-			String host = MemnonConfiguration.getHost();
-            int port = MemnonConfiguration.getPort();
+			String host = configuration.getHost();
+            int port = configuration.getPort();
 			JSONArray keyspaces = this.service.getStorage().getKeyspaces();
 			String output = "Connected to [" + host + ":" + port + "] w/ " + keyspaces.size() + " keyspaces.";
 			result = Result.healthy(output);

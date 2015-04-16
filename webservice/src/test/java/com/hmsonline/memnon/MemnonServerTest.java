@@ -12,7 +12,7 @@ public abstract class MemnonServerTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-        serverThread = new Thread(new EmbeddableServer(new String[] { "server", "src/test/resources/memnon.yaml", "-host=localhost"}));
+        serverThread = new Thread(new EmbeddableServer(new String[] { "server", "src/test/resources/memnon.yaml"}));
         serverThread.start();
         Thread.sleep(5000);
     }

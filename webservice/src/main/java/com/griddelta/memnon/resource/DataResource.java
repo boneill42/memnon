@@ -1,4 +1,4 @@
-package com.hmsonline.memnon.resource;
+package com.griddelta.memnon.resource;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -17,18 +17,19 @@ import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hmsonline.memnon.CassandraStorage;
-import com.hmsonline.memnon.MemnonService;
-import com.hmsonline.memnon.MemnonConfiguration;
+import com.griddelta.memnon.CassandraStorage;
+import com.griddelta.memnon.MemnonConfiguration;
+import com.griddelta.memnon.MemnonApplication;
 
-@Path("/data/")
+@Path("/memnon/")
+// TODO: Make consistency level configurable (HTTP Header?)
 public class DataResource {
     private static Logger logger = LoggerFactory.getLogger(DataResource.class);
-    private MemnonService virgilService = null;
+    private MemnonApplication virgilService = null;
     private MemnonConfiguration config = null;
     public static final String CONSISTENCY_LEVEL_HEADER = "X-Consistency-Level";
 
-    public DataResource(MemnonService virgilService) {
+    public DataResource(MemnonApplication virgilService) {
         this.virgilService = virgilService;
         this.config = virgilService.getConfig();
     }
@@ -37,7 +38,7 @@ public class DataResource {
     // Keyspace Operations
     // ================================================================================================================
     @GET
-    @Path("/")
+    @Path("/schema/")
     @Produces({ "application/json" })
     public JSONArray getKeyspaces() throws Exception {
         if (logger.isDebugEnabled())
@@ -46,7 +47,7 @@ public class DataResource {
     }
 
     @PUT
-    @Path("/{keyspace}")
+    @Path("/schema/{keyspace}")
     @Produces({ "application/json" })
     public void createKeyspace(@PathParam("keyspace") String keyspace,
             @DefaultValue("SimpleStrategy") @QueryParam("strategy") String strategy,
@@ -58,7 +59,7 @@ public class DataResource {
     }
 
     @DELETE
-    @Path("/{keyspace}")
+    @Path("/schema/{keyspace}")
     @Produces({ "application/json" })
     public void dropKeyspace(@PathParam("keyspace") String keyspace) throws Exception {
         if (logger.isDebugEnabled())
@@ -70,7 +71,7 @@ public class DataResource {
     // Table Operations
     // ================================================================================================================
     @PUT
-    @Path("/{keyspace}/{table}")
+    @Path("/schema/{keyspace}/{table}")
     @Produces({ "application/json" })
     public void createTable(@PathParam("keyspace") String keyspace,
             @PathParam("table") String table, @QueryParam("columns") String columns,
@@ -85,7 +86,7 @@ public class DataResource {
     }
 
     @DELETE
-    @Path("/{keyspace}/{table}")
+    @Path("/schema/{keyspace}/{table}")
     @Produces({ "application/json" })
     public void dropTable(@PathParam("keyspace") String keyspace,
             @PathParam("table") String table) throws Exception {
@@ -98,7 +99,7 @@ public class DataResource {
     // Data Operations
     // ================================================================================================================
     @PUT
-    @Path("/{keyspace}/{table}")
+    @Path("/data/{keyspace}/{table}")
     @Produces({ "application/json" })
     public void update(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
             @QueryParam("row") String row, @QueryParam("where") String where,
@@ -111,11 +112,11 @@ public class DataResource {
                     + "], where : [" + where + "]");
 
         getCassandraStorage().update(keyspace, table, rowJson, whereJson,
-                config.getConsistencyLevel(consistencyLevel));
+                config.getConsistencyLevel());
     }
 
     @GET
-    @Path("/{keyspace}/{table}")
+    @Path("/data/{keyspace}/{table}")
     public JSONArray select(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
             @QueryParam("columns") String columns, @QueryParam("where") String where, @HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
             throws Exception {
@@ -125,11 +126,11 @@ public class DataResource {
         if (logger.isDebugEnabled())
             logger.debug("Select [" + keyspace + "]:[" + table + "], columns: [" + columns + "], where : [" + where + "]");
 
-        return getCassandraStorage().select(keyspace, table, columnsJson, whereJson, config.getConsistencyLevel(consistencyLevel));
+        return getCassandraStorage().select(keyspace, table, columnsJson, whereJson, config.getConsistencyLevel());
     }
 
     @DELETE
-    @Path("/{keyspace}/{table}")
+    @Path("/data/{keyspace}/{table}")
     @Produces({ "application/json" })
     public void delete(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
             @QueryParam("columns") String columns, @QueryParam("where") String where, @HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
@@ -140,7 +141,7 @@ public class DataResource {
             logger.debug("Deleting [" + keyspace + "]:[" + table + "], columns: [" + columns + "], where [" + where + "]");
 
         getCassandraStorage().delete(keyspace, table, columnsJson, whereJson,
-                config.getConsistencyLevel(consistencyLevel));
+                config.getConsistencyLevel());
     }
 
     // ================================================================================================================

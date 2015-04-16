@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.datastax.driver.core.ConsistencyLevel;
-import com.hmsonline.memnon.CassandraStorage;
-import com.hmsonline.memnon.MemnonService;
+import com.griddelta.memnon.CassandraStorage;
+import com.griddelta.memnon.MemnonApplication;
 
 public class CassandraStorageTest extends MemnonServerTest {
     private static final String TABLE = "test_cf";
@@ -20,7 +20,7 @@ public class CassandraStorageTest extends MemnonServerTest {
 
     @Test
     public void testDatabaseServices() throws Exception {
-        CassandraStorage dataService = MemnonService.storage;
+        CassandraStorage dataService = MemnonApplication.storage;
 
         try { // CLEANUP FROM BEFORE
         //    dataService.dropKeyspace(KEYSPACE);

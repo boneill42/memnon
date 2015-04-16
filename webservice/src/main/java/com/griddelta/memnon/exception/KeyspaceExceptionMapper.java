@@ -1,7 +1,7 @@
 //
 // Copyright (c) 2012 Health Market Science, Inc.
 //
-package com.hmsonline.memnon.exception;
+package com.griddelta.memnon.exception;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package com.hmsonline.memnon;
+package com.griddelta.memnon;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -45,8 +45,8 @@ import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
 import com.datastax.driver.core.querybuilder.Select.Selection;
 import com.datastax.driver.core.querybuilder.Update;
-import com.hmsonline.memnon.exception.MemnonException;
-import com.hmsonline.memnon.resource.JsonMarshaller;
+import com.griddelta.memnon.exception.MemnonException;
+import com.griddelta.memnon.resource.JsonMarshaller;
 
 public class CassandraStorage {
 	protected static Cluster cluster;
@@ -56,10 +56,10 @@ public class CassandraStorage {
 	private Map<String, Session> sessions = new HashMap<String, Session>();
 	private Session defaultSession = null;
 
-	public CassandraStorage(MemnonConfiguration config) throws Exception {
+	public CassandraStorage(String host, int port) throws Exception {
 		try {
 			cluster = Cluster.builder()
-					.addContactPoints(MemnonConfiguration.getHost()).build();
+					.addContactPoints(host + ":" + port).build();
 		} catch (NoHostAvailableException e) {
 			throw new RuntimeException(e);
 		}

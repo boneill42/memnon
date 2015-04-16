@@ -1,4 +1,4 @@
-package com.hmsonline.memnon.resource;
+package com.griddelta.memnon.resource;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
