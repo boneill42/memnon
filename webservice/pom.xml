@@ -7,7 +7,7 @@
 	<name>Memnon : Web Services</name>
 
 	<parent>
-		<groupId>com.hmsonline</groupId>
+		<groupId>com.griddelta</groupId>
 		<artifactId>memnon-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -23,7 +23,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:boneill42/memnon.git</connection>
 		<developerConnection>scm:git:git@github.com:boneill42/memnon.git</developerConnection>
-		<url>git@github.com:hmsonline/memnon.git</url>
+		<url>git@github.com:boneill42/memnon.git</url>
 	</scm>
 
 	<developers>
@@ -51,6 +51,14 @@
 				<exclusion>
 					<artifactId>guava</artifactId>
 					<groupId>com.google.guava</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>javax.servlet</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>

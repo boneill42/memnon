@@ -25,13 +25,13 @@ import com.griddelta.memnon.MemnonApplication;
 // TODO: Make consistency level configurable (HTTP Header?)
 public class DataResource {
     private static Logger logger = LoggerFactory.getLogger(DataResource.class);
-    private MemnonApplication virgilService = null;
+    private MemnonApplication memnon = null;
     private MemnonConfiguration config = null;
     public static final String CONSISTENCY_LEVEL_HEADER = "X-Consistency-Level";
 
-    public DataResource(MemnonApplication virgilService) {
-        this.virgilService = virgilService;
-        this.config = virgilService.getConfig();
+    public DataResource(MemnonApplication memnon) {
+        this.memnon = memnon;
+        this.config = memnon.getConfig();
     }
 
     // ================================================================================================================
@@ -149,7 +149,7 @@ public class DataResource {
     // ================================================================================================================
 
     public CassandraStorage getCassandraStorage() {
-        return this.virgilService.getStorage();
+        return this.memnon.getStorage();
     }
 
     private JSONArray parseJsonArray(String str) {

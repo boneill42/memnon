@@ -15,17 +15,20 @@ public class MemnonApplication extends Application<MemnonConfiguration> {
     MemnonConfiguration config = null;
 
     public static void main(String[] args) throws Exception {
-        new MemnonApplication().run(args);
+    	
+        MemnonApplication app = new MemnonApplication();
+        app.run(args);
     }
 
     @Override
     public void initialize(Bootstrap<MemnonConfiguration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/ui", "/foo"));        
+        bootstrap.addBundle(new AssetsBundle("/ui", "/foo"));
         // bootstrap.addCommand(new MemnonCommand(this));
     }
 
     @Override
     public void run(MemnonConfiguration configuration, Environment env) throws Exception {    	
+        this.setStorage(new CassandraStorage(configuration.getHost(), configuration.getPort()));
         env.jersey().register(new DataResource(this));
         env.healthChecks().register("Cassandra", new CassandraHealthCheck(this, configuration));
         env.jersey().register(new KeyspaceExceptionMapper());

@@ -1,13 +1,13 @@
 host: localhost
-port: 9160
+port: 9042
 
 server:
   applicationConnectors:
     - type: http
-      port: 8080
+      port: 4242
   adminConnectors:
     - type: http
-      port: 8081
+      port: 4243
 
 # Logging settings.
 logging:
