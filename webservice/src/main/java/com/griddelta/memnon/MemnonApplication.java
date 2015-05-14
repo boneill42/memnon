@@ -14,8 +14,7 @@ public class MemnonApplication extends Application<MemnonConfiguration> {
     public static CassandraStorage storage = null;
     MemnonConfiguration config = null;
 
-    public static void main(String[] args) throws Exception {
-    	
+    public static void main(String[] args) throws Exception {    	
         MemnonApplication app = new MemnonApplication();
         app.run(args);
     }

@@ -16,6 +16,7 @@
         <modules>
                 <module>webservice</module>
                 <module>hadoop</module>
+                <module>spark</module>
         </modules>
 
 	<licenses>

@@ -17,6 +17,7 @@ import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.datastax.driver.core.ConsistencyLevel;
 import com.griddelta.memnon.CassandraStorage;
 import com.griddelta.memnon.MemnonConfiguration;
 import com.griddelta.memnon.MemnonApplication;
@@ -24,152 +25,177 @@ import com.griddelta.memnon.MemnonApplication;
 @Path("/memnon/")
 // TODO: Make consistency level configurable (HTTP Header?)
 public class DataResource {
-    private static Logger logger = LoggerFactory.getLogger(DataResource.class);
-    private MemnonApplication memnon = null;
-    private MemnonConfiguration config = null;
-    public static final String CONSISTENCY_LEVEL_HEADER = "X-Consistency-Level";
+	private static Logger logger = LoggerFactory.getLogger(DataResource.class);
+	private MemnonApplication memnon = null;
+	private MemnonConfiguration config = null;
+	public static final String CONSISTENCY_LEVEL_HEADER = "X-Consistency-Level";
 
-    public DataResource(MemnonApplication memnon) {
-        this.memnon = memnon;
-        this.config = memnon.getConfig();
-    }
+	public DataResource(MemnonApplication memnon) {
+		this.memnon = memnon;
+		this.config = memnon.getConfig();
+	}
 
-    // ================================================================================================================
-    // Keyspace Operations
-    // ================================================================================================================
-    @GET
-    @Path("/schema/")
-    @Produces({ "application/json" })
-    public JSONArray getKeyspaces() throws Exception {
-        if (logger.isDebugEnabled())
-            logger.debug("Listing keyspaces.");
-        return getCassandraStorage().getKeyspaces();
-    }
+	// ================================================================================================================
+	// Keyspace Operations
+	// ================================================================================================================
+	@GET
+	@Path("/schema/")
+	@Produces({ "application/json" })
+	public JSONArray getKeyspaces() throws Exception {
+		if (logger.isDebugEnabled())
+			logger.debug("Listing keyspaces.");
+		return getCassandraStorage().getKeyspaces();
+	}
 
-    @PUT
-    @Path("/schema/{keyspace}")
-    @Produces({ "application/json" })
-    public void createKeyspace(@PathParam("keyspace") String keyspace,
-            @DefaultValue("SimpleStrategy") @QueryParam("strategy") String strategy,
-            @DefaultValue("1") @QueryParam("replicationFactor") int replicationFactor) throws Exception {
+	@PUT
+	@Path("/schema/{keyspace}")
+	@Produces({ "application/json" })
+	public void createKeyspace(
+			@PathParam("keyspace") String keyspace,
+			@DefaultValue("SimpleStrategy") @QueryParam("strategy") String strategy,
+			@DefaultValue("1") @QueryParam("replicationFactor") int replicationFactor)
+			throws Exception {
 
-        if (logger.isDebugEnabled())
-            logger.debug("Creating keyspace [" + keyspace + "]");
-        getCassandraStorage().addKeyspace(keyspace, strategy, replicationFactor);
-    }
+		if (logger.isDebugEnabled())
+			logger.debug("Creating keyspace [" + keyspace + "]");
+		getCassandraStorage()
+				.addKeyspace(keyspace, strategy, replicationFactor);
+	}
 
-    @DELETE
-    @Path("/schema/{keyspace}")
-    @Produces({ "application/json" })
-    public void dropKeyspace(@PathParam("keyspace") String keyspace) throws Exception {
-        if (logger.isDebugEnabled())
-            logger.debug("Dropping keyspace [" + keyspace + "]");
-        getCassandraStorage().dropKeyspace(keyspace);
-    }
+	@DELETE
+	@Path("/schema/{keyspace}")
+	@Produces({ "application/json" })
+	public void dropKeyspace(@PathParam("keyspace") String keyspace)
+			throws Exception {
+		if (logger.isDebugEnabled())
+			logger.debug("Dropping keyspace [" + keyspace + "]");
+		getCassandraStorage().dropKeyspace(keyspace);
+	}
 
-    // ================================================================================================================
-    // Table Operations
-    // ================================================================================================================
-    @PUT
-    @Path("/schema/{keyspace}/{table}")
-    @Produces({ "application/json" })
-    public void createTable(@PathParam("keyspace") String keyspace,
-            @PathParam("table") String table, @QueryParam("columns") String columns,
-            @QueryParam("keys") String keys) throws Exception {
+	// ================================================================================================================
+	// Table Operations
+	// ================================================================================================================
+	@PUT
+	@Path("/schema/{keyspace}/{table}")
+	@Produces({ "application/json" })
+	public void createTable(@PathParam("keyspace") String keyspace,
+			@PathParam("table") String table,
+			@QueryParam("columns") String columns,
+			@QueryParam("keys") String keys) throws Exception {
 
-        JSONObject columnsJson = parseJsonObject(columns);
-        JSONArray keysJson = parseJsonArray(keys);
-        if (logger.isDebugEnabled())
-            logger.debug("Creating table [" + keyspace + "]:[" + table + "]" + ", columns : [" + columns
-                    + "], keys [" + keys + "]");
-        getCassandraStorage().createTable(keyspace, table, columnsJson, keysJson);
-    }
+		JSONObject columnsJson = parseJsonObject(columns);
+		JSONArray keysJson = parseJsonArray(keys);
+		if (logger.isDebugEnabled())
+			logger.debug("Creating table [" + keyspace + "]:[" + table + "]"
+					+ ", columns : [" + columns + "], keys [" + keys + "]");
+		getCassandraStorage().createTable(keyspace, table, columnsJson,
+				keysJson);
+	}
 
-    @DELETE
-    @Path("/schema/{keyspace}/{table}")
-    @Produces({ "application/json" })
-    public void dropTable(@PathParam("keyspace") String keyspace,
-            @PathParam("table") String table) throws Exception {
-        if (logger.isDebugEnabled())
-            logger.debug("Deleteing table [" + keyspace + "]:[" + table + "]");
-        getCassandraStorage().dropTable(keyspace, table);
-    }
+	@DELETE
+	@Path("/schema/{keyspace}/{table}")
+	@Produces({ "application/json" })
+	public void dropTable(@PathParam("keyspace") String keyspace,
+			@PathParam("table") String table) throws Exception {
+		if (logger.isDebugEnabled())
+			logger.debug("Deleteing table [" + keyspace + "]:[" + table + "]");
+		getCassandraStorage().dropTable(keyspace, table);
+	}
 
-    // ================================================================================================================
-    // Data Operations
-    // ================================================================================================================
-    @PUT
-    @Path("/data/{keyspace}/{table}")
-    @Produces({ "application/json" })
-    public void update(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
-            @QueryParam("row") String row, @QueryParam("where") String where,
-            @HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel) throws Exception {
+	// ================================================================================================================
+	// Data Operations
+	// ================================================================================================================
+	@PUT
+	@Path("/data/{keyspace}/{table}")
+	@Produces({ "application/json" })
+	public void update(@PathParam("keyspace") String keyspace,
+			@PathParam("table") String table, 
+			@QueryParam("columns") String columns,
+			@QueryParam("keys") String keys,
+			@HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
+			throws Exception {
 
-        JSONObject rowJson = parseJsonObject(row);
-        JSONObject whereJson = parseJsonObject(where);
-        if (logger.isDebugEnabled())
-            logger.debug("Update [" + keyspace + "]:[" + table + "]" + ", row : [" + row
-                    + "], where : [" + where + "]");
+		JSONObject columnsJson = parseJsonObject(columns);
+		JSONObject keysJson = parseJsonObject(keys);
+		if (logger.isDebugEnabled())
+			logger.debug("Update [" + keyspace + "]:[" + table + "]"
+					+ ", columns : [" + columns + "], keys : [" + keys + "]");
 
-        getCassandraStorage().update(keyspace, table, rowJson, whereJson,
-                config.getConsistencyLevel());
-    }
+		getCassandraStorage().update(keyspace, table, columnsJson, keysJson,
+				getConsistencyLevel(consistencyLevel));
+	}
 
-    @GET
-    @Path("/data/{keyspace}/{table}")
-    public JSONArray select(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
-            @QueryParam("columns") String columns, @QueryParam("where") String where, @HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
-            throws Exception {
-        
-        JSONArray columnsJson = parseJsonArray(columns);
-        JSONObject whereJson = parseJsonObject(where);
-        if (logger.isDebugEnabled())
-            logger.debug("Select [" + keyspace + "]:[" + table + "], columns: [" + columns + "], where : [" + where + "]");
+	@GET
+	@Path("/data/{keyspace}/{table}")
+	public JSONArray select(@PathParam("keyspace") String keyspace,
+			@PathParam("table") String table,
+			@QueryParam("columns") String columns,
+			@QueryParam("where") String where,
+			@HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
+			throws Exception {
 
-        return getCassandraStorage().select(keyspace, table, columnsJson, whereJson, config.getConsistencyLevel());
-    }
+		JSONArray columnsJson = parseJsonArray(columns);
+		JSONObject whereJson = parseJsonObject(where);
+		if (logger.isDebugEnabled())
+			logger.debug("Select [" + keyspace + "]:[" + table
+					+ "], columns: [" + columns + "], where : [" + where + "]");
 
-    @DELETE
-    @Path("/data/{keyspace}/{table}")
-    @Produces({ "application/json" })
-    public void delete(@PathParam("keyspace") String keyspace, @PathParam("table") String table,
-            @QueryParam("columns") String columns, @QueryParam("where") String where, @HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
-            throws Exception {
-        JSONObject whereJson = parseJsonObject(where);
-        JSONArray columnsJson = parseJsonArray(columns);
-        if (logger.isDebugEnabled())
-            logger.debug("Deleting [" + keyspace + "]:[" + table + "], columns: [" + columns + "], where [" + where + "]");
+		return getCassandraStorage().select(keyspace, table, columnsJson,
+				whereJson, config.getConsistencyLevel());
+	}
 
-        getCassandraStorage().delete(keyspace, table, columnsJson, whereJson,
-                config.getConsistencyLevel());
-    }
+	@DELETE
+	@Path("/data/{keyspace}/{table}")
+	@Produces({ "application/json" })
+	public void delete(@PathParam("keyspace") String keyspace,
+			@PathParam("table") String table,
+			@QueryParam("columns") String columns,
+			@QueryParam("where") String where,
+			@HeaderParam(CONSISTENCY_LEVEL_HEADER) String consistencyLevel)
+			throws Exception {
+		JSONObject whereJson = parseJsonObject(where);
+		JSONArray columnsJson = parseJsonArray(columns);
+		if (logger.isDebugEnabled())
+			logger.debug("Deleting [" + keyspace + "]:[" + table
+					+ "], columns: [" + columns + "], where [" + where + "]");
 
-    // ================================================================================================================
-    // Helper Methods
-    // ================================================================================================================
+		getCassandraStorage().delete(keyspace, table, columnsJson, whereJson,
+				config.getConsistencyLevel());
+	}
 
-    public CassandraStorage getCassandraStorage() {
-        return this.memnon.getStorage();
-    }
+	// ================================================================================================================
+	// Helper Methods
+	// ================================================================================================================
 
-    private JSONArray parseJsonArray(String str) {
-        JSONArray json;
-        if (StringUtils.isNotBlank(str)) {
-            json = (JSONArray) JSONValue.parse(str);
-        } else {
-            json = null;
-        }
-        return json;
-    }
+	public ConsistencyLevel getConsistencyLevel(String consistencyLevel){
+		if (consistencyLevel == null)
+			return null;
+		else 
+			return ConsistencyLevel.valueOf(consistencyLevel);
+	}
+	
+	public CassandraStorage getCassandraStorage() {
+		return this.memnon.getStorage();
+	}
 
-    private JSONObject parseJsonObject(String str) {
-        JSONObject json;
-        if (StringUtils.isNotBlank(str)) {
-            json = (JSONObject) JSONValue.parse(str);
-        } else {
-            json = null;
-        }
-        return json;
-    }
+	private JSONArray parseJsonArray(String str) {
+		JSONArray json;
+		if (StringUtils.isNotBlank(str)) {
+			json = (JSONArray) JSONValue.parse(str);
+		} else {
+			json = null;
+		}
+		return json;
+	}
+
+	private JSONObject parseJsonObject(String str) {
+		JSONObject json;
+		if (StringUtils.isNotBlank(str)) {
+			json = (JSONObject) JSONValue.parse(str);
+		} else {
+			json = null;
+		}
+		return json;
+	}
 
 }

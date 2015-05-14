@@ -50,8 +50,7 @@ import com.griddelta.memnon.resource.JsonMarshaller;
 
 public class CassandraStorage {
 	protected static Cluster cluster;
-	private static Logger LOG = LoggerFactory
-			.getLogger(CassandraStorage.class);
+	private static Logger LOG = LoggerFactory.getLogger(CassandraStorage.class);
 
 	private Map<String, Session> sessions = new HashMap<String, Session>();
 	private Session defaultSession = null;
@@ -59,8 +58,8 @@ public class CassandraStorage {
 	public CassandraStorage(String host, int port) throws Exception {
 		LOG.debug("Connecting to Cassandra Storage @ [{}:{}]", host, port);
 		try {
-			cluster = Cluster.builder()
-					.addContactPoints(host).withPort(port).build();
+			cluster = Cluster.builder().addContactPoints(host).withPort(port)
+					.build();
 		} catch (NoHostAvailableException e) {
 			throw new RuntimeException(e);
 		}
@@ -209,15 +208,13 @@ public class CassandraStorage {
 
 	private void executeStatement(String keyspace, String statement) {
 		if (LOG.isDebugEnabled())
-			LOG.debug("On [" + keyspace + "], executing [" + statement
-					+ "] ");
+			LOG.debug("On [" + keyspace + "], executing [" + statement + "] ");
 		getSession(keyspace).execute(statement);
 	}
 
 	private ResultSet executeStatement(String keyspace, Query statement) {
 		if (LOG.isDebugEnabled())
-			LOG.debug("On [" + keyspace + "], executing [" + statement
-					+ "] ");
+			LOG.debug("On [" + keyspace + "], executing [" + statement + "] ");
 		return getSession(keyspace).execute(statement);
 	}
 

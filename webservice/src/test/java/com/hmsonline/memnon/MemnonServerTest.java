@@ -14,7 +14,7 @@ public abstract class MemnonServerTest {
     public static void setup() throws Exception {
         serverThread = new Thread(new EmbeddableServer(new String[] { "server", "src/test/resources/memnon.yaml"}));
         serverThread.start();
-        Thread.sleep(20000);
+        Thread.sleep(5000);
     }
 
     @AfterClass
